@@ -118,6 +118,14 @@ body{
     background-color: yellow;
 }
 
+.headline-4{
+    background-color: aqua;
+}
+
+.headline-5{
+    background-color: coral;
+}
+
 .headline-thumb{
     width: 100%;
     height: 100%;
@@ -172,3 +180,53 @@ body{
     bottom: 5%;
     left: 5%;  
 }
+
+.moving-buttons{
+    position: absolute;
+    z-index: 100;
+
+    right: 30%;
+    bottom: 5%;
+}
+
+.moving-buttons button{
+    padding: 10px;
+    font-size: 1.6rem;
+    border-radius: 20%;
+    color: #e5e5e5;
+    margin: 10px 6px;
+    background: rgba( 255, 255, 255, 0.1 );
+    box-shadow: 0 8px 32px 0 rgba(13, 15, 54, 0.37);
+    backdrop-filter: blur( 5.5px );
+    -webkit-backdrop-filter: blur( 5.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    cursor: pointer;
+}
+
+/* Headlines animation */
+
+/* Switch to next headline */
+
+.headline-item.next{
+    animation: move 1s linear forwards;
+}
+
+@keyframes move{
+    to{
+        transform: translateX(-100vw);
+    }
+}
+
+/* Switch to previous headline */
+
+.headline-item.prev{
+    animation: back 1s linear forwards;
+}
+
+@keyframes back{
+    to{
+        transform: translateX(0);
+    }
+}
+
