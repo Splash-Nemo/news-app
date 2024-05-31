@@ -154,14 +154,38 @@ const getPopularNews = (popularData) =>{
 //Science News
 
 const fetchScienceNews = async (category,pageSize) =>{
-    const url = 'https://newsapi.org/v2/top-headlines?country=in&category=${category}&pageSize=${pageSize}&apiKey=${apiKey}'
+    const url = `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&q=${category}&apiKey=e5fb6d0c577e4ecaa279046e4598826a`
     const scienceData = await fetch(url);
     const response = await scienceData.json();
     console.log(response)
     return response.articles;
 }
 
+const scienceNewsItem = document.querySelectorAll('.science-news-item');
+const scienceNewsThumb = document.querySelectorAll('.science-news-thumb');
+const scienceNewsDate = document.querySelectorAll('.date');
+const scienceHeadline = document.querySelectorAll('.headline');
 
+let scienceNewsCount = 0;
+let scienceNewsi = 0;
+
+const getScienceNews = (scienceData)=>{
+    while(scienceNewsCount < scienceNewsItem.length && scienceNewsi < scienceData.length){
+        if(scienceData[scienceNewsi].urlToImage){
+            scienceNewsThumb[scienceNewsCount].src = scienceData[scienceNewsi].urlToImage;
+            scienceHeadline[scienceNewsCount].textContent = scienceData[scienceNewsi].title;
+
+            const publishedAt = new Date(scienceData[scienceNewsi].publishedAt);
+            const formattedDate = publishedAt.toISOString().split('T')[0];
+            scienceNewsDate[scienceNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
+
+            scienceNewsCount+=1;
+            scienceNewsi+=1;
+        }else{
+            scienceNewsi+=1;
+        }
+    }
+}
 
 
 fetchHeadlineData('general',10).then(getHeadlines)
