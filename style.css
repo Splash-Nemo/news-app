@@ -349,19 +349,38 @@ body{
     font-size: 1.3rem;
 }
 
-.additional-news-list{
+.additional-news-list {
     margin: 4rem 0;
     display: flex;
     gap: 1rem;
     font-size: small;
+    justify-content: space-between; /* Horizontally arrange items */
 }
 
-.additional-news-item>img{
+.additional-news-item {
+    flex: 1; /* Make each item occupy equal space */
+    display: flex;
+    flex-direction: column;
+}
+
+.additional-news-item img {
     width: 100%;
-    object-fit: contain;
+    height: 100%; /* Ensure images fill their container */
+    object-fit: cover; /* Maintain aspect ratio */
 }
 
-.science-news .heading,.health-news .heading,.politics-news .heading,.sports-news .heading{
+.additional-news-item .content {
+    flex: 1; /* Allow content to expand */
+    display: flex;
+    flex-direction: column;
+}
+
+.additional-news-item .content .date,
+.additional-news-item .content .headline {
+    margin-top: 0.5rem; /* Add spacing between date and headline */
+}
+
+.science-news .heading,.health-news .heading,.business-news .heading,.sports-news .heading{
     text-transform: uppercase;
 }
 
