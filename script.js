@@ -187,9 +187,46 @@ const getScienceNews = (scienceData)=>{
     }
 }
 
+// Health News
+
+const fetchHealthNews = async (category,pageSize) => {
+    const url = `https://newsapi.org/v2/top-headlines?country=in&category=${category}&pageSize=${pageSize}&apiKey=${apiKey}`
+    const healthData = await fetch(url)
+    const response = await healthData.json()
+    console.log(response)
+    return response.articles
+}
+
+const healthNewsItem =  document.querySelectorAll('.health-news-item')
+const healthThumb = document.querySelectorAll('.health-news-thumb')
+const healthDate = document.querySelectorAll('.health-date')
+const healthHeadline = document.querySelectorAll('.health-headline')
+
+let healthNewsCount = 0;
+let healthNewsi = 0;
+
+const getHealthNews = (healthData) => {
+    while(healthNewsCount < healthNewsItem.length && healthNewsi < healthData.length){
+        if(healthData[healthNewsi].urlToImage){
+            healthThumb[healthNewsCount].src = healthData[healthNewsi].urlToImage
+            healthHeadline[healthNewsCount].textContent = healthData[healthNewsi].title
+            
+            const publishedAt = new Date(healthData[healthNewsi].publishedAt);
+            const formattedDate = publishedAt.toISOString().split('T')[0];
+            healthDate[healthNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
+
+            console.log(healthNewsi);
+            healthNewsCount+=1;
+            healthNewsi+=1;
+        }else{
+            healthNewsi+=1;
+        }
+    }
+}
 
 fetchHeadlineData('general',10).then(getHeadlines)
 fetchLatestData('general',10).then(getLatestNews)
 fetchPopularNews('general',10).then(getPopularNews)
-fetchScienceNews('science',10).then(getScienceNews);
+fetchScienceNews('science',10).then(getScienceNews)
+fetchHealthNews('health',10).then(getHealthNews)
 }
