@@ -40,7 +40,7 @@ nextButton.addEventListener('click', () => {
 });
 
 window.onload = function(){
-const apiKey = 'e5fb6d0c577e4ecaa279046e4598826a';
+const apiKey = '876719291248422db7bd388300201a4c';
 
 const fetchHeadlineData = async(category, pageSize) => {
     const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=${pageSize}&apiKey=${apiKey}`
@@ -63,9 +63,9 @@ let i=0;
 
 const getHeadlines = (data) =>{
     while(headlineItemsCount<headlineItems.length && i<data.length){
-        if(data[i].urlToImage){
+        if(data[i].urlToImage && data[i].author!=null){
             headlineItemsHeading[headlineItemsCount].textContent = data[i].title;
-            headlineItemsAuthor[headlineItemsCount].innerHTML = `<i class="fa-solid fa-minus"></i> ${data[i].author}`;
+            headlineItemsAuthor[headlineItemsCount].innerHTML = `<i class="fa-solid fa-minus"></i> ${data[i].author} <div style= "margin: 1rem;"></div>`;
             headlineItemsThumbs[headlineItemsCount].src = data[i].urlToImage;
             shortHeadingItemsHeading[headlineItemsCount].textContent = data[i].title;
             // shortHeadingsDate[headlineItemsCount].textContent = data[i].publishedAt;
@@ -118,7 +118,7 @@ const getLatestNews = (latestdata) => {
 //Popular News
 
 const fetchPopularNews = async(category,pageSize) => {
-    const url = `https://newsapi.org/v2/everything?q=${category}&sortby=popularity&apiKey=e5fb6d0c577e4ecaa279046e4598826a`;
+    const url = `https://newsapi.org/v2/everything?q=${category}&sortby=popularity&apiKey=${apiKey}`;
     const popularData = await fetch(url)
     const response = await popularData.json()
     console.log(response)
@@ -154,7 +154,7 @@ const getPopularNews = (popularData) =>{
 //Science News
 
 const fetchScienceNews = async (category,pageSize) =>{
-    const url = `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&q=${category}&apiKey=e5fb6d0c577e4ecaa279046e4598826a`
+    const url = `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&q=${category}&apiKey=${apiKey}`
     const scienceData = await fetch(url);
     const response = await scienceData.json();
     console.log(response)
@@ -190,7 +190,7 @@ const getScienceNews = (scienceData)=>{
 // Health News
 
 const fetchHealthNews = async (category,pageSize) => {
-    const url = `https://newsapi.org/v2/top-headlines?country=in&category=${category}&pageSize=${pageSize}&apiKey=${apiKey}`
+    const url = `https://newsapi.org/v2/everything?sources=medical-news-today,healthline&pageSize=${pageSize}&apiKey=${apiKey}`;
     const healthData = await fetch(url)
     const response = await healthData.json()
     console.log(response)
@@ -224,9 +224,81 @@ const getHealthNews = (healthData) => {
     }
 }
 
+// business News
+const fetchbusinessNews = async (category, pageSize) => {
+    const url = `https://newsapi.org/v2/everything?sources=bloomberg,financial-times&pageSize=${pageSize}&apiKey=${apiKey}`;
+    const businessData = await fetch(url);
+    const response = await businessData.json();
+    console.log(response);
+    return response.articles;
+}
+
+const businessNewsItems = document.querySelectorAll('.business-news-item');
+const businessNewsThumb = document.querySelectorAll('.business-news-thumb');
+const businessNewsDate = document.querySelectorAll('.politcial-date');
+const businessNewsHeading = document.querySelectorAll('.business-headline');
+
+let businessNewsCount = 0;
+let businessNewsi = 0;
+
+const getbusinessNews = (businessData) => {
+    while (businessNewsCount < businessNewsItems.length && businessNewsi < businessData.length) {
+        if (businessData[businessNewsi].urlToImage) {
+            businessNewsThumb[businessNewsCount].src = businessData[businessNewsi].urlToImage;
+            businessNewsHeading[businessNewsCount].textContent = businessData[businessNewsi].title;
+
+            const publishedAt = new Date(businessData[businessNewsi].publishedAt);
+            const formattedDate = publishedAt.toISOString().split('T')[0];
+            businessNewsDate[businessNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
+
+            businessNewsCount += 1;
+            businessNewsi += 1;
+        } else {
+            businessNewsi += 1;
+        }
+    }
+}
+
+// Sports News
+const fetchSportsNews = async (category, pageSize) => {
+    const url = `https://newsapi.org/v2/everything?sources=espn,bbc-sport&pageSize=${pageSize}&apiKey=${apiKey}`;
+    const sportsData = await fetch(url);
+    const response = await sportsData.json();
+    console.log(response);
+    return response.articles;
+}
+
+const sportsNewsItems = document.querySelectorAll('.sports-news-item');
+const sportsNewsThumb = document.querySelectorAll('.sports-news-thumb');
+const sportsNewsDate = document.querySelectorAll('.sports-date');
+const sportsNewsHeading = document.querySelectorAll('.sports-headline');
+
+let sportsNewsCount = 0;
+let sportsNewsi = 0;
+
+const getSportsNews = (sportsData) => {
+    while (sportsNewsCount < sportsNewsItems.length && sportsNewsi < sportsData.length) {
+        if (sportsData[sportsNewsi].urlToImage) {
+            sportsNewsThumb[sportsNewsCount].src = sportsData[sportsNewsi].urlToImage;
+            sportsNewsHeading[sportsNewsCount].textContent = sportsData[sportsNewsi].title;
+
+            const publishedAt = new Date(sportsData[sportsNewsi].publishedAt);
+            const formattedDate = publishedAt.toISOString().split('T')[0];
+            sportsNewsDate[sportsNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
+
+            sportsNewsCount += 1;
+            sportsNewsi += 1;
+        } else {
+            sportsNewsi += 1;
+        }
+    }
+}
+
 fetchHeadlineData('general',10).then(getHeadlines)
 fetchLatestData('general',10).then(getLatestNews)
 fetchPopularNews('general',10).then(getPopularNews)
 fetchScienceNews('science',10).then(getScienceNews)
 fetchHealthNews('health',10).then(getHealthNews)
+fetchbusinessNews('business',10).then(getbusinessNews)
+fetchSportsNews('sports',10).then(getSportsNews)
 }
