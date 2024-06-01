@@ -43,7 +43,7 @@ window.onload = function(){
 const apiKey = '876719291248422db7bd388300201a4c';
 
 const fetchHeadlineData = async(category, pageSize) => {
-    const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=${pageSize}&apiKey=${apiKey}`
+    const url = `http://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=${pageSize}&apiKey=${apiKey}`
     const data = await fetch(url)
     const response = await data.json()
     console.log(response);
@@ -89,7 +89,7 @@ let LatestNewscount = 0;
 let LatestNewsi = 0;
 
 const fetchLatestData = async(category,pageSize) => {
-    const url = `https://newsapi.org/v2/top-headlines?country=in&category=${category}&pageSize=${pageSize}&apiKey=${apiKey}`
+    const url = `http://newsapi.org/v2/top-headlines?country=in&category=${category}&pageSize=${pageSize}&apiKey=${apiKey}`
     const latestdata = await fetch(url)
     const response = await latestdata.json()
     console.log(response);
@@ -118,7 +118,7 @@ const getLatestNews = (latestdata) => {
 //Popular News
 
 const fetchPopularNews = async(category,pageSize) => {
-    const url = `https://newsapi.org/v2/everything?q=${category}&sortby=popularity&apiKey=${apiKey}`;
+    const url = `http://newsapi.org/v2/everything?q=${category}&sortby=popularity&apiKey=${apiKey}`;
     const popularData = await fetch(url)
     const response = await popularData.json()
     console.log(response)
@@ -154,7 +154,7 @@ const getPopularNews = (popularData) =>{
 //Science News
 
 const fetchScienceNews = async (category,pageSize) =>{
-    const url = `https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&q=${category}&apiKey=${apiKey}`
+    const url = `http://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&q=${category}&apiKey=${apiKey}`
     const scienceData = await fetch(url);
     const response = await scienceData.json();
     console.log(response)
@@ -190,7 +190,7 @@ const getScienceNews = (scienceData)=>{
 // Health News
 
 const fetchHealthNews = async (category,pageSize) => {
-    const url = `https://newsapi.org/v2/everything?sources=medical-news-today,healthline&pageSize=${pageSize}&apiKey=${apiKey}`;
+    const url = `http://newsapi.org/v2/everything?sources=medical-news-today,healthline&pageSize=${pageSize}&apiKey=${apiKey}`;
     const healthData = await fetch(url)
     const response = await healthData.json()
     console.log(response)
@@ -226,7 +226,7 @@ const getHealthNews = (healthData) => {
 
 // business News
 const fetchbusinessNews = async (category, pageSize) => {
-    const url = `https://newsapi.org/v2/everything?sources=bloomberg,financial-times&pageSize=${pageSize}&apiKey=${apiKey}`;
+    const url = `http://newsapi.org/v2/everything?sources=bloomberg,financial-times&pageSize=${pageSize}&apiKey=${apiKey}`;
     const businessData = await fetch(url);
     const response = await businessData.json();
     console.log(response);
@@ -261,7 +261,7 @@ const getbusinessNews = (businessData) => {
 
 // Sports News
 const fetchSportsNews = async (category, pageSize) => {
-    const url = `https://newsapi.org/v2/everything?sources=espn,bbc-sport&pageSize=${pageSize}&apiKey=${apiKey}`;
+    const url = `http://newsapi.org/v2/everything?sources=espn&pageSize=${pageSize}&apiKey=${apiKey}`;
     const sportsData = await fetch(url);
     const response = await sportsData.json();
     console.log(response);
