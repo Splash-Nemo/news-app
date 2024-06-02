@@ -99,9 +99,8 @@ const fetchLatestData = async(category,pageSize) => {
 }
 
 const getLatestNews = (latestdata) => {
-    while(LatestNewscount<latestNewsItems.length && LatestNewsi<latestdata.length){
         latestdata.forEach((article,i) => {
-            if(article.urlToImage){
+            if(article.urlToImage && LatestNewscount<latestNewsItems.length){
                 latestNewsHeading[LatestNewscount].textContent = article.title;
             
                 const publishedAt = new Date(article.publishedAt);
@@ -117,7 +116,6 @@ const getLatestNews = (latestdata) => {
                 LatestNewscount+=1;
             }
         })
-    }
 }
 
 //Popular News
@@ -176,21 +174,21 @@ let scienceNewsCount = 0;
 let scienceNewsi = 0;
 
 const getScienceNews = (scienceData)=>{
-    while(scienceNewsCount < scienceNewsItem.length && scienceNewsi < scienceData.length){
-        if(scienceData[scienceNewsi].urlToImage){
-            scienceNewsThumb[scienceNewsCount].src = scienceData[scienceNewsi].urlToImage;
-            scienceHeadline[scienceNewsCount].textContent = scienceData[scienceNewsi].title;
+    scienceData.forEach((article,i)=>{
+        if(article.urlToImage && scienceNewsCount < scienceNewsItem.length){
+            scienceNewsThumb[scienceNewsCount].src = article.urlToImage;
+            scienceHeadline[scienceNewsCount].textContent = article.title;
 
-            const publishedAt = new Date(scienceData[scienceNewsi].publishedAt);
+            const publishedAt = new Date(article.publishedAt);
             const formattedDate = publishedAt.toISOString().split('T')[0];
             scienceNewsDate[scienceNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
-
+            
+            scienceNewsItem[scienceNewsCount].addEventListener('click',()=>{
+                window.open(article.url, "_blank");
+            })
             scienceNewsCount+=1;
-            scienceNewsi+=1;
-        }else{
-            scienceNewsi+=1;
         }
-    }
+    })
 }
 
 // Health News
@@ -212,22 +210,21 @@ let healthNewsCount = 0;
 let healthNewsi = 0;
 
 const getHealthNews = (healthData) => {
-    while(healthNewsCount < healthNewsItem.length && healthNewsi < healthData.length){
-        if(healthData[healthNewsi].urlToImage){
-            healthThumb[healthNewsCount].src = healthData[healthNewsi].urlToImage
-            healthHeadline[healthNewsCount].textContent = healthData[healthNewsi].title
+    healthData.forEach((article,i)=>{
+        if(healthNewsCount < healthNewsItem.length && article.urlToImage){
+            healthThumb[healthNewsCount].src = article.urlToImage
+            healthHeadline[healthNewsCount].textContent = article.title
             
-            const publishedAt = new Date(healthData[healthNewsi].publishedAt);
+            const publishedAt = new Date(article.publishedAt);
             const formattedDate = publishedAt.toISOString().split('T')[0];
             healthDate[healthNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
 
-            console.log(healthNewsi);
+            healthNewsItem[healthNewsCount].addEventListener('click',()=>{
+                window.open(article.url,"_blank");
+            })
             healthNewsCount+=1;
-            healthNewsi+=1;
-        }else{
-            healthNewsi+=1;
         }
-    }
+    })
 }
 
 // business News
@@ -248,21 +245,24 @@ let businessNewsCount = 0;
 let businessNewsi = 0;
 
 const getbusinessNews = (businessData) => {
-    while (businessNewsCount < businessNewsItems.length && businessNewsi < businessData.length) {
-        if (businessData[businessNewsi].urlToImage) {
-            businessNewsThumb[businessNewsCount].src = businessData[businessNewsi].urlToImage;
-            businessNewsHeading[businessNewsCount].textContent = businessData[businessNewsi].title;
 
-            const publishedAt = new Date(businessData[businessNewsi].publishedAt);
+    businessData.forEach((article,i)=>{
+
+        if (article.urlToImage) {
+            businessNewsThumb[businessNewsCount].src = article.urlToImage;
+            businessNewsHeading[businessNewsCount].textContent = article.title;
+    
+            const publishedAt = new Date(article.publishedAt);
             const formattedDate = publishedAt.toISOString().split('T')[0];
             businessNewsDate[businessNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
+            
+            businessNewsItems[businessNewsCount].addEventListener('click',()=>{
+                window.open(article.url,"_blank");
+            })
 
             businessNewsCount += 1;
-            businessNewsi += 1;
-        } else {
-            businessNewsi += 1;
         }
-    }
+    })
 }
 
 // Sports News
@@ -283,21 +283,24 @@ let sportsNewsCount = 0;
 let sportsNewsi = 0;
 
 const getSportsNews = (sportsData) => {
-    while (sportsNewsCount < sportsNewsItems.length && sportsNewsi < sportsData.length) {
+
+    sportsData.forEach((article,i)=>{
         if (sportsData[sportsNewsi].urlToImage) {
             sportsNewsThumb[sportsNewsCount].src = sportsData[sportsNewsi].urlToImage;
             sportsNewsHeading[sportsNewsCount].textContent = sportsData[sportsNewsi].title;
-
+    
             const publishedAt = new Date(sportsData[sportsNewsi].publishedAt);
             const formattedDate = publishedAt.toISOString().split('T')[0];
             sportsNewsDate[sportsNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
-
+            
+            sportsNewsItems[sportsNewsCount].addEventListener('click',()=>{
+                window.open(article.url,"_blank");
+            })
+            
             sportsNewsCount += 1;
             sportsNewsi += 1;
-        } else {
-            sportsNewsi += 1;
         }
-    }
+    })
 }
 
 fetchHeadlineData('general',10).then(getHeadlines)
