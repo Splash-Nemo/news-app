@@ -56,28 +56,30 @@ const headlineItemsHeading = document.querySelectorAll('.headline-heading');
 const headlineItemsThumbs = document.querySelectorAll('.headline-thumb');
 const headlineItemsAuthor = document.querySelectorAll('.author');
 const shortHeadingItemsHeading = document.querySelectorAll('.short-headings');
+const readMore = document.querySelectorAll('.read-more');
 const shortHeadingsDate = document.querySelectorAll('.short-headline-date');
 
 let headlineItemsCount = 0;
-let i=0;
 
 const getHeadlines = (data) =>{
-    while(headlineItemsCount<headlineItems.length && i<data.length){
-        if(data[i].urlToImage && data[i].author!=null){
-            headlineItemsHeading[headlineItemsCount].textContent = data[i].title;
-            headlineItemsAuthor[headlineItemsCount].innerHTML = `<i class="fa-solid fa-minus"></i> ${data[i].author} <div style= "margin: 1rem;"></div>`;
-            headlineItemsThumbs[headlineItemsCount].src = data[i].urlToImage;
-            shortHeadingItemsHeading[headlineItemsCount].textContent = data[i].title;
-            // shortHeadingsDate[headlineItemsCount].textContent = data[i].publishedAt;
+    data.forEach((article, i) => {
+        if (headlineItemsCount < headlineItemsHeading.length) {
+            if (article.urlToImage && article.author != null) {
+                headlineItemsHeading[headlineItemsCount].textContent = article.title;
+                headlineItemsAuthor[headlineItemsCount].innerHTML = `<i class="fa-solid fa-minus"></i> ${article.author} <div style= "margin: 1rem;"></div>`;
+                headlineItemsThumbs[headlineItemsCount].src = article.urlToImage;
 
-            headlineItemsCount+=1;
-            i+=1;
-        }else{
-            i+=1;
+                readMore[headlineItemsCount].addEventListener('click', () => {
+                    window.open(article.url, "_blank");
+                });
+
+                shortHeadingItemsHeading[headlineItemsCount].textContent = article.title;
+
+                headlineItemsCount += 1;
+            }
         }
-    }
+    });
 }
-
 //Latest NEWS
 
 const latestNewsItems = document.querySelectorAll('.latest-news-item');
@@ -98,20 +100,23 @@ const fetchLatestData = async(category,pageSize) => {
 
 const getLatestNews = (latestdata) => {
     while(LatestNewscount<latestNewsItems.length && LatestNewsi<latestdata.length){
-        if(latestdata[LatestNewsi].urlToImage){
-            latestNewsHeading[LatestNewscount].textContent = latestdata[LatestNewsi].title;
+        latestdata.forEach((article,i) => {
+            if(article.urlToImage){
+                latestNewsHeading[LatestNewscount].textContent = article.title;
+            
+                const publishedAt = new Date(article.publishedAt);
+                const formattedDate = publishedAt.toISOString().split('T')[0];
+                latestNewsDate[LatestNewscount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
+            
+                latestNewsThumb[LatestNewscount].src = article.urlToImage;
+                
+                latestNewsItems[LatestNewscount].addEventListener('click', ()=>{
+                    window.open(article.url,"_blank");
+                })
 
-            const publishedAt = new Date(latestdata[LatestNewsi].publishedAt);
-            const formattedDate = publishedAt.toISOString().split('T')[0];
-            latestNewsDate[LatestNewscount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
-
-            latestNewsThumb[LatestNewscount].src = latestdata[LatestNewsi].urlToImage;
-
-            LatestNewscount+=1;
-            LatestNewsi+=1;
-        }else{
-            LatestNewsi+=1;
-        }
+                LatestNewscount+=1;
+            }
+        })
     }
 }
 
@@ -134,21 +139,22 @@ let popularNewsCount = 0;
 let popularNewsi = 0;
 
 const getPopularNews = (popularData) =>{
-    while(popularNewsCount < popularNewsItems.length && popularNewsi < popularData.length){
-        if(popularData[popularNewsi].urlToImage){
-            popularNewsThumb[popularNewsCount].src = popularData[popularNewsi].urlToImage;
-            popularNewsHeading[popularNewsCount].textContent = popularData[popularNewsi].title;
+    popularData.forEach((article,i) =>{
+        if(article.urlToImage && popularNewsCount < popularNewsItems.length){
+            popularNewsThumb[popularNewsCount].src = article.urlToImage;
+            popularNewsHeading[popularNewsCount].textContent = article.title;
             
-            const publishedAt = new Date(popularData[popularNewsi].publishedAt);
+            const publishedAt = new Date(article.publishedAt);
             const formattedDate = publishedAt.toISOString().split('T')[0];
             popularNewsDate[popularNewsCount].innerHTML = `${formattedDate} <span class="red-color" style="color: red;">|</span>`;
 
+            popularNewsItems[popularNewsCount].addEventListener('click',()=>{
+                window.open(article.url, "_blank");
+            })
+
             popularNewsCount+=1;
-            popularNewsi +=1;
-        }else{
-            popularNewsi+=1;
         }
-    }
+    })
 }
 
 //Science News
