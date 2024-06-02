@@ -510,4 +510,44 @@ body{
     .short-headlines-list {
         display: none;
     }
+
+    .container-2{
+        padding: 10px 0;
+    }
+
+    .container-2 .stories-news{
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    #latest-news-section{
+        width: 97%;
+    }
+
+    .container-2 hr{
+        margin-bottom: 2px;
+        width: 60%;
+    }
+
+    #popular-news-section{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 95%;
+    }
+
+    .popular-news-list{
+    border: none;
+    margin-bottom: 15px;
+    padding: 0;
+    }
+
+    .popular-news-list>div .content{
+    padding: 0;
+    }
+
+    .popular-news-list>div:hover{
+        transform: scale(1);
+        cursor: pointer;
+    }
 }
