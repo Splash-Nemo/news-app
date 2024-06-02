@@ -16,7 +16,6 @@ html {
     scrollbar-width: thin; /* "auto" or "thin" for Firefox */
 }
 
-
 *{
     margin: 0;
     padding: 0;
@@ -471,4 +470,44 @@ body{
 .container-3 button:hover{
     color: rgb(116, 178, 216);
     cursor: pointer;
+}
+
+/* For devices with a maximum width of 480px (typical smartphones) */
+@media only screen and (max-width: 600px) {
+    body{
+        font-size: 1.4rem;
+    }
+
+    .container-1{
+        min-height: 50vh;
+        padding: 10px;
+    }
+
+    .container-1 .navbar{
+        font-size: 1.2rem;
+    }
+
+    .container-1 .section-heading h1 {
+        margin: 20px 30px 15px;
+        font-size: 2.4rem;
+    }
+
+    .container-1 .header {
+        margin: 10px;
+    }
+
+    .container-1 .headline-container {
+        display: flex;
+        flex-direction: column;
+        margin: 5px 5px;
+        height: 30vh;
+    }
+
+    .container-1 .headline-item .text-content {
+        width: 80%;
+    }
+
+    .short-headlines-list {
+        display: none;
+    }
 }
