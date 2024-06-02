@@ -283,6 +283,21 @@ body{
     object-fit: cover;
 }
 
+.latest-news-item{
+    padding: 0.2rem;
+    border: 2px solid white;
+}
+
+.latest-news-heading{
+    margin: 0.5rem 0;
+}
+
+.latest-news-item:hover{
+    cursor: pointer;
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+}
+
 .latest-news-date{
     font-size: 1rem;
 }
@@ -332,14 +347,18 @@ body{
     width: 30%;
     object-fit: cover;
 }
-
+/* OVER HERE */
 .popular-news-list>div .content{
     width: 50%;
     position: absolute;
     bottom: 1%;
     left: 1%;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid white;
     padding: 0.3rem;
+}
+
+.popular-news-list>div .content:hover{
+    border-bottom: 1px solid red;
 }
 
 .popular-news-date{
