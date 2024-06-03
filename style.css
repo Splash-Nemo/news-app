@@ -424,7 +424,7 @@ body{
     justify-content: space-around;
     gap: 1rem;
 
-    padding: 3rem 1rem;
+    /* padding: 3rem 1rem; */
 }
 
 .newsletter{
@@ -472,14 +472,14 @@ body{
     cursor: pointer;
 }
 
-/* For devices with a maximum width of 480px (typical smartphones) */
-@media only screen and (max-width: 600px) {
+/* For devices with a maximum width of 900px*/
+@media only screen and (max-width: 900px) {
     body{
         font-size: 1.4rem;
     }
 
     .container-1{
-        min-height: 50vh;
+        min-height: 70vh;
         padding: 10px;
     }
 
@@ -500,7 +500,7 @@ body{
         display: flex;
         flex-direction: column;
         margin: 5px 5px;
-        height: 30vh;
+        height: 60vh;
     }
 
     .container-1 .headline-item .text-content {
@@ -523,6 +523,22 @@ body{
 
     #latest-news-section{
         width: 97%;
+        padding-right: 1rem;
+    }
+
+    .latest-news-list{
+        padding-top: 1rem;
+        padding-right: 1rem;
+    }
+
+    .latest-news-item{
+        height: 80%;
+        overflow: hidden;
+    }
+
+    .latest-news-date-heading{
+        padding: 2rem 0;
+        overflow: hidden;
     }
 
     .container-2 hr{
@@ -532,6 +548,7 @@ body{
 
     #popular-news-section{
     padding-left: 1rem;
+    margin-top: 20px;
     padding-right: 1rem;
     width: 95%;
     }
@@ -539,7 +556,11 @@ body{
     .popular-news-list{
     border: none;
     margin-bottom: 15px;
-    padding: 0;
+    padding: 1rem 0;
+    }
+
+    .popular-news-item{
+        padding-top: 2rem;
     }
 
     .popular-news-list>div .content{
@@ -549,5 +570,45 @@ body{
     .popular-news-list>div:hover{
         transform: scale(1);
         cursor: pointer;
+    }
+
+    .science-news, .health-news, .business-news, .sports-news{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .science-news-list, .health-news-list, .business-news-list, .sports-news-list{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .semi-container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(2,1fr);
+    }
+
+    .container-3{
+        font-size: small;
+    }
+
+    .newsletter{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+        width: 100%;
+        padding: 1rem 1.5rem;
+        gap: 2rem;
+    }
+    
+    .mail-input{
+        border-radius: 10px;
+        width: 90%;
+        padding: 1rem;
+        background-color: white;
+        align-self: flex-start;
     }
 }
