@@ -3,6 +3,12 @@
 
 This project is a fully functional news website that fetches news articles from the News API and displays them in various sections such as headlines, latest news, popular news, and more. It provides an intuitive user interface for users to read news articles conveniently.
 
+
+## Demo
+
+
+https://github.com/Splash-Nemo/news-app/assets/113250246/c03709a8-aa3d-4200-aeb5-f3a859bc20d8
+
 ## Kudos
 
  - Data sourced from [News API](https://newsapi.org/)
@@ -41,11 +47,6 @@ https://newsapi.org/
 | Newsletter Input Text Color | ![#000000](https://via.placeholder.com/10/000000?text=+) #000000 |
 | Newsletter Submit Button Color | ![#87CEFA](https://via.placeholder.com/10/87CEFA?text=+) #87CEFA |
 | Newsletter Submit Button Hover Color | ![#74B2D8](https://via.placeholder.com/10/74B2D8?text=+) #74B2D8 |
-
-## Demo
-
-
-https://github.com/Splash-Nemo/news-app/assets/113250246/c03709a8-aa3d-4200-aeb5-f3a859bc20d8
 
 ## Run Locally
 
